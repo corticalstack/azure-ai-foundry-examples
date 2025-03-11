@@ -1,0 +1,40 @@
+{
+    "name": "Azure AI Foundry examples",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-azuretools.vscode-docker",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true
+            }
+        }
+    },
+    // Specifies which user the VS Code server and terminal windows will run as
+    // Using a non-root user (appuser) is a security best practice
+    "remoteUser": "appuser",
+    
+    // Mount the user's Azure credentials directory and .env file into the container
+    // This allows the container to use the same Azure authentication and environment variables as the host
+    "mounts": [
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/appuser/.azure,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/.env,target=/workspaces/azure-ai-foundry-examples/.env,type=bind,consistency=cached"
+    ],
+    
+    // Define how the local workspace is mounted into the container
+    // This is the recommended approach for dev containers
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/azure-ai-foundry-examples,type=bind,consistency=cached",
+    
+    // Set the default directory where VS Code will open inside the container
+    // This should match the target path in workspaceMount and the WORKDIR in Dockerfile
+    "workspaceFolder": "/workspaces/azure-ai-foundry-examples"
+}

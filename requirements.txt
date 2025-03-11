@@ -1,0 +1,6 @@
+azure-identity==1.20.0
+azure-ai-projects==1.0.0b7
+azure-ai-inference==1.0.0b9
+azure-core>=1.26.0
+black>=23.0.0  # For code formatting in the dev container
+python-dotenv>=1.0.0  # For loading environment variables from .env file
