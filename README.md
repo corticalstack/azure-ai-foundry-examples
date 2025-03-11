@@ -4,7 +4,10 @@ This repository contains examples demonstrating how to use Azure AI Foundry serv
 
 ## Examples
 
-- [01-azure-ai-model-inference-chat-client](./01-azure-ai-model-inference-chat-client/README.md): A simple example application demonstrating how to use the Azure AI Foundry Python SDK to create a chat completion client for Azure AI model inference.
+- [01-project-based-model-inference-chat-client](./01-project-based-model-inference-chat-client/README.md): A simple example application demonstrating how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
+- [02-project-based-openai-chat-client](./02-project-based-openai-chat-client/README.md): An example application demonstrating how to use the Azure AI Foundry Python SDK to create an Azure OpenAI client cia a foundry project for interacting with Azure OpenAI service.
+- [03-direct-inference-sdk-chat-client](./03-direct-inference-sdk-chat-client/README.md): An example application demonstrating how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
+- [04-azure-openai-sdk-chat-client](./04-azure-openai-sdk-chat-client/README.md): An example application demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
 
 ## Development Container
 

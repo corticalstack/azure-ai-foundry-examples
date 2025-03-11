@@ -19,10 +19,13 @@ load_dotenv(dotenv_path=root_dir / ".env")
 # Configure logging - only to file, not to console to avoid polluting chat output
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 numeric_level = getattr(logging, log_level, logging.INFO)
+# Get the directory name programmatically for the log file name
+dir_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+log_file = f"{dir_name}.log"
 logging.basicConfig(
     level=numeric_level,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("01-azure-ai-model-inference-chat-client.log")],
+    handlers=[logging.FileHandler(log_file)],
 )
 logger = logging.getLogger("azure_ai_foundry_chat")
 

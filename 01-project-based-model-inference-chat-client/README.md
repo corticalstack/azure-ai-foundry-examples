@@ -1,10 +1,10 @@
-# Azure AI Model Inference Chat Client Example (Azure AI Service)
+# Project based Azure AI Model Inference Chat Client Example (Azure AI Service)
 
 ## Introduction
 
 This is a simple example application demonstrating how to use the Azure AI Foundry Python SDK to create a chat completion client, where the application connects to the Azure AI Foundry project, sends message history to a language model (in this example, **gpt-4o-mini**, but this can be changed), and displays the response.
 
-**Important distinction**: This example specifically demonstrates model consumption with **Azure AI model inference**: A single endpoint for multiple models of different types, including OpenAI models and others from the Azure AI Foundry model catalog. Models are consumed through an Azure AI services resource connection in the project, rather than a model deployed to an Azure OpenAI service.
+**Important distinction**: This example specifically demonstrates model consumption with **Azure AI model inference** via the foundry project: A single endpoint for multiple models of different types, including OpenAI models and others from the Azure AI Foundry model catalog. Models are consumed through an Azure AI services resource connection in the project, rather than a model deployed to an Azure OpenAI service.
 
 This example showcases:
 - How to initialize the Azure AI Foundry project client
@@ -105,4 +105,4 @@ The application uses Python's built-in logging module to log information at diff
 - **ERROR**: Due to a more serious problem, the application has not been able to perform a function
 - **CRITICAL**: A serious error, indicating that the application itself may be unable to continue running
 
-Logs are written to a `chat_client.log` file in the application directory to avoid polluting the chat output.
+Logs are written to a `01-project-based-model-inference-chat-client.log` file in the application directory to avoid polluting the chat output.
