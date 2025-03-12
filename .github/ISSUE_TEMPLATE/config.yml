@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Azure AI Foundry Documentation
+    url: https://learn.microsoft.com/azure/ai-services/
+    about: Check the documentation for help with common issues
+  - name: GitHub Discussions
+    url: https://github.com/corticalstack/azure-ai-foundry-examples/discussions
+    about: Please ask and answer questions here

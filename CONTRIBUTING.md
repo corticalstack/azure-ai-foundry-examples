@@ -12,7 +12,7 @@ This repository contains examples that demonstrate how to use Azure AI Foundry s
 
 ## Issues
 
-All forms of feedback are welcome through [issues](https://github.com/corticalstack/azure-ai-foundry-examples/issues/new). Please provide as much detail as possible when reporting issues.
+All forms of feedback are welcome through [issues](https://github.com/corticalstack/azure-ai-foundry-examples/issues/new/choose). We provide templates for bug reports and feature requests to help you provide all the necessary information. Please select the appropriate template and fill it out as completely as possible.
 
 ## Pull Requests
 
