@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 import logging
 from dotenv import load_dotenv
 import pathlib
 
 from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.prompts import PromptTemplate
 from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import ClientAuthenticationError, ServiceRequestError
 
@@ -14,9 +15,10 @@ current_dir = pathlib.Path(__file__).parent.absolute()
 root_dir = current_dir.parent
 load_dotenv(dotenv_path=root_dir / ".env")
 
-# Configure logging - only to file, not to console to avoid polluting chat output
+# Configure logging - only to file, not to console to avoid polluting output
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 numeric_level = getattr(logging, log_level, logging.INFO)
+
 # Get the directory name programmatically for the log file name
 dir_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 log_file = f"{dir_name}.log"
@@ -25,7 +27,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler(log_file)],
 )
-logger = logging.getLogger("azure_ai_inference_chat")
+logger = logging.getLogger("azure_ai_inference_prompty_file")
 
 
 def get_endpoint_and_key():
@@ -57,92 +59,6 @@ def get_endpoint_and_key():
         return None, None
 
     return endpoint, api_key
-
-
-def run_chat_loop(chat_client):
-    """
-    Run the interactive chat loop with the provided Azure AI Inference chat client.
-    Maintains conversation history for context.
-
-    Args:
-        chat_client: The Azure AI Inference chat completions client
-    """
-    # Initialize conversation history with system message
-    system_message = "You are a helpful AI assistant that answers questions."
-    conversation_history = [{"role": "system", "content": system_message}]
-
-    logger.info("Starting chat conversation loop")
-    print("\n===== Azure AI Inference Chat Client =====")
-    print(
-        "Starting a new conversation. Type 'quit' to quit or 'clear' to reset conversation history.\n"
-    )
-
-    # Chat loop
-    while True:
-        # Get a chat completion based on a user-provided prompt
-        user_prompt = input("Enter a question (or 'quit' to quit, 'clear' to reset): ")
-
-        if user_prompt.lower() in ["quit", "q"]:
-            logger.info("User requested to exit")
-            print("Goodbye!")
-            break
-
-        if user_prompt.lower() in ["clear"]:
-            logger.info("User requested to clear conversation history")
-            conversation_history = [{"role": "system", "content": system_message}]
-            print("Conversation history cleared. Starting fresh.")
-            continue
-
-        if not user_prompt.strip():
-            logger.warning("Empty prompt received")
-            print("Please enter a valid question.")
-            continue
-
-        # Add user message to history
-        conversation_history.append({"role": "user", "content": user_prompt})
-
-        logger.debug(f"User prompt: {user_prompt}")
-        logger.debug(f"Conversation history length: {len(conversation_history)}")
-        print("Generating response...")
-
-        try:
-            # Prepare the payload with the complete conversation history for context
-            logger.info("Sending request to model")
-            payload = {
-                "messages": conversation_history,
-                "max_tokens": 4096,
-                "temperature": 0.7,
-                "top_p": 1,
-                "stop": []
-            }
-            
-            # Send the request to the model
-            response = chat_client.complete(payload)
-
-            # Get the assistant's response
-            assistant_response = response.choices[0].message.content
-
-            # Add assistant response to history
-            conversation_history.append(
-                {"role": "assistant", "content": assistant_response}
-            )
-
-            logger.debug(f"Response received: {assistant_response[:50]}...")
-            print("\nResponse:")
-            print(assistant_response)
-            
-            # Print usage information if available
-            if hasattr(response, 'usage') and response.usage:
-                print("\nUsage:")
-                print(f"  Prompt tokens: {response.usage.prompt_tokens}")
-                print(f"  Completion tokens: {response.usage.completion_tokens}")
-                print(f"  Total tokens: {response.usage.total_tokens}")
-                
-            print("\n" + "-" * 50 + "\n")
-
-        except Exception as e:
-            logger.error(f"Error generating response: {e}")
-            print(f"Error generating response: {e}")
 
 
 def initialize_client(endpoint, api_key):
@@ -182,9 +98,72 @@ def initialize_client(endpoint, api_key):
     return None
 
 
+def run_prompty_file_example(chat_client):
+    """
+    Run an example using a .prompty file to create a prompt and get a completion.
+
+    Args:
+        chat_client: The Azure AI Inference chat completions client
+    """
+    logger.info("Running prompty file example")
+    print("\n===== Azure AI Inference Prompty File Example =====")
+    
+    try:
+        # Get the path to the .prompty file
+        prompty_file_path = os.path.join(os.path.dirname(__file__), "writing_assistant.prompty")
+        print(f"\nLoading prompt template from: {prompty_file_path}")
+        
+        # Load the prompt template from the .prompty file
+        prompt_template = PromptTemplate.from_prompty(prompty_file_path)
+        
+        # Display the model name and parameters loaded from the .prompty file
+        print(f"\nLoaded model name: {prompt_template.model_name}")
+        print("Loaded parameters:")
+        for key, value in prompt_template.parameters.items():
+            print(f"  {key}: {value}")
+        
+        # Generate messages from the template, passing in the context as variables
+        print("\nCreating messages from template with variables:")
+        messages = prompt_template.create_messages(first_name="Jane", last_name="Doe")
+        print("Generated messages:")
+        for message in messages:
+            print(f"Role: {message['role']}")
+            print(f"Content: {message['content']}")
+            print("---")
+
+        # Prepare the request using model and parameters from the .prompty file
+        logger.info("Sending request to model")
+        print("\nSending request to model...")
+        
+        # Send the request to the model using model name and parameters from the .prompty file
+        response = chat_client.complete(
+            messages=messages,
+            model=prompt_template.model_name,
+            **prompt_template.parameters
+        )
+
+        # Get the assistant's response
+        assistant_response = response.choices[0].message.content
+
+        logger.debug(f"Response received: {assistant_response[:50]}...")
+        print("\nResponse:")
+        print(assistant_response)
+        
+        # Print usage information if available
+        if hasattr(response, 'usage') and response.usage:
+            print("\nUsage:")
+            print(f"  Prompt tokens: {response.usage.prompt_tokens}")
+            print(f"  Completion tokens: {response.usage.completion_tokens}")
+            print(f"  Total tokens: {response.usage.total_tokens}")
+
+    except Exception as e:
+        logger.error(f"Error in prompty file example: {e}")
+        print(f"Error in prompty file example: {e}")
+
+
 def main():
     """Main entry point for the application."""
-    logger.info("=== Azure AI Inference Chat Client ===")
+    logger.info("=== Azure AI Inference Prompty File Example ===")
     logger.info("See README.md for setup instructions")
 
     print("Initializing client...")
@@ -199,12 +178,12 @@ def main():
     if not chat_client:
         return
 
-    # Run the chat loop
+    # Run the prompty file example
     try:
-        run_chat_loop(chat_client)
+        run_prompty_file_example(chat_client)
     except Exception as ex:
-        logger.error(f"An error occurred during chat: {ex}", exc_info=True)
-        print(f"Error: An error occurred during chat")
+        logger.error(f"An error occurred: {ex}", exc_info=True)
+        print(f"Error: An error occurred")
         print(f"Details: {ex}")
 
 

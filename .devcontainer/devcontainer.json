@@ -9,13 +9,23 @@
             "extensions": [
                 "ms-python.python",
                 "ms-azuretools.vscode-docker",
-                "ms-python.vscode-pylance"
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-renderers",
+                "ms-toolsai.vscode-jupyter-cell-tags",
+                "ms-toolsai.vscode-jupyter-slideshow",
+                "ms-azure-devops.azure-pipelines"
             ],
             "settings": {
                 "python.linting.enabled": true,
                 "python.linting.pylintEnabled": true,
                 "python.formatting.provider": "black",
-                "editor.formatOnSave": true
+                "editor.formatOnSave": true,
+                "jupyter.alwaysTrustNotebooks": true,
+                "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
+                "jupyter.enableNativeInteractiveWindow": true,
+                "jupyter.enableCellCodeLens": true,
+                "jupyter.askForKernelRestart": false
             }
         }
     },

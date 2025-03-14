@@ -1,24 +1,34 @@
-# Contributing
+# 👨‍💻 Contributing
 
 This repository welcomes contributions and suggestions! These are examples for Azure AI Foundry services. Please read through the contributing guide below to ensure a smooth contribution process.
 
-## Code of Conduct
+---
+
+## 📜 Code of Conduct
 
 Please be respectful and considerate, the aim is to foster an open and welcoming environment for all contributors.
 
-## Goals
+---
 
-This repository contains examples that demonstrate how to use Azure AI Foundry services. Use the samples in this repository to try out Azure AI Foundry capabilities.
+## 🎯 Goals
 
-## Issues
+This repository contains examples that demonstrate how to use Azure AI Foundry services.
+
+---
+
+## 🐛 Issues
 
 All forms of feedback are welcome through [issues](https://github.com/corticalstack/azure-ai-foundry-examples/issues/new/choose). We provide templates for bug reports and feature requests to help you provide all the necessary information. Please select the appropriate template and fill it out as completely as possible.
 
-## Pull Requests
+---
+
+## 🔀 Pull Requests
 
 Pull requests (PRs) to this repo require review and approval to merge. Please follow the pre-defined template and the guidelines below.
 
-### How to Contribute
+---
+
+### 🛠️ How to Contribute
 
 1. **Fork the repository** (create your own copy on GitHub)
 2. **Clone your fork** to your local machine:
@@ -42,7 +52,7 @@ Pull requests (PRs) to this repo require review and approval to merge. Please fo
    ```
 8. **Open a Pull Request** from your fork to the original repository
 
-### Adding New Examples
+### ➕ Adding New Examples
 
 When adding new examples with additional dependencies:
 
@@ -55,15 +65,17 @@ When adding new examples with additional dependencies:
 
 This ensures that the dev container will work with all examples in the repository and that your example is well-documented and easy to use.
 
-## Repository Structure
+---
 
-The repository is organized with numbered example directories, each demonstrating a specific Azure AI Foundry capability:
+## 📂 Repository Structure
+
+The repository is organized with numbered example directories, each demonstrating a specific Azure AI Foundry capability or way of working and interacting with Foundry assets.
 
 - Each example directory contains a README.md file explaining the example
 - The root directory contains common files and configuration for all examples
 - The dev container provides a consistent environment for running all examples
 
-## Documentation
+## 📚 Documentation
 
 When adding or updating examples, please ensure that:
 

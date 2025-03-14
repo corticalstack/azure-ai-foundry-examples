@@ -3,7 +3,7 @@ import re
 import os
 import logging
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Optional, Tuple
 import pathlib
 
 from azure.ai.projects import AIProjectClient
@@ -19,6 +19,7 @@ load_dotenv(dotenv_path=root_dir / ".env")
 # Configure logging - only to file, not to console to avoid polluting chat output
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 numeric_level = getattr(logging, log_level, logging.INFO)
+
 # Get the directory name programmatically for the log file name
 dir_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 log_file = f"{dir_name}.log"
@@ -27,7 +28,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler(log_file)],
 )
-logger = logging.getLogger("azure_openai_chat")
+logger = logging.getLogger("azure_ai_foundry_chat")
 
 
 def get_project_connection_string() -> Optional[str]:
@@ -72,20 +73,20 @@ def get_project_connection_string() -> Optional[str]:
     return conn_str
 
 
-def run_chat_loop(openai_client):
+def run_chat_loop(chat_client):
     """
-    Run the interactive chat loop with the provided Azure OpenAI client.
+    Run the interactive chat loop with the provided Azure AI Founbdry AI Servces model inference chat client.
     Maintains conversation history for context.
 
     Args:
-        openai_client: The Azure OpenAI client
+        chat_client: The Azure AI Foundry (AI Services AI model inference) chat completions client
     """
     # Initialize conversation history with system message
     system_message = "You are a helpful AI assistant that answers questions."
     conversation_history = [{"role": "system", "content": system_message}]
 
     logger.info("Starting chat conversation loop")
-    print("\n===== Azure OpenAI Chat Client =====")
+    print("\n===== Azure AI Model Inference Chat Client =====")
     print(
         "Starting a new conversation. Type 'quit' to quit or 'clear' to reset conversation history.\n"
     )
@@ -121,8 +122,8 @@ def run_chat_loop(openai_client):
         try:
             # Send the complete conversation history for context
             logger.info("Sending request to model")
-            response = openai_client.chat.completions.create(
-                model="gpt-4o-mini",  # IMPORTANT! Change model deployment name here as appropriate
+            response = chat_client.complete(
+                model="gpt-4o-mini",  # IMPORTANT! Change model deployment name here as appripriate
                 messages=conversation_history,
             )
 
@@ -146,13 +147,13 @@ def run_chat_loop(openai_client):
 
 def initialize_client(connection_string):
     """
-    Initialize the Azure AI Foundry client and get an Azure OpenAI client.
+    Initialize the Azure AI Foundry client.
 
     Args:
         connection_string: The validated connection string
 
     Returns:
-        The Azure OpenAI client or None if initialization fails
+        The chat completions client or None if initialization fails
     """
     try:
         logger.info("Connecting to Azure AI Foundry...")
@@ -163,15 +164,15 @@ def initialize_client(connection_string):
             conn_str=connection_string,
         )
 
-        # Get an Azure OpenAI client
-        logger.info("Creating Azure OpenAI client...")
-        openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
+        # Get a chat client
+        logger.info("Creating AI Foundry AI Model inference completion client...")
+        chat_client = project_client.inference.get_chat_completions_client()
 
         logger.info("Connected successfully!")
         print(
-            "Connected successfully to Azure OpenAI service client!"
+            "Connected successfully to Azure AI model inference service completion client!"
         )
-        return openai_client
+        return chat_client
 
     except ClientAuthenticationError as auth_error:
         logger.error(f"Authentication error: {auth_error}")
@@ -188,7 +189,7 @@ def initialize_client(connection_string):
 
 def main():
     """Main entry point for the application."""
-    logger.info("=== Azure OpenAI Chat Client ===")
+    logger.info("=== Azure AI Foundry AI Model Inference Chat Client ===")
     logger.info("See README.md for setup instructions")
 
     print("Initializing client...")
@@ -199,13 +200,13 @@ def main():
         return
 
     # Initialize the client
-    openai_client = initialize_client(connection_string)
-    if not openai_client:
+    chat_client = initialize_client(connection_string)
+    if not chat_client:
         return
 
     # Run the chat loop
     try:
-        run_chat_loop(openai_client)
+        run_chat_loop(chat_client)
     except Exception as ex:
         logger.error(f"An error occurred during chat: {ex}", exc_info=True)
         print(f"Error: An error occurred during chat")

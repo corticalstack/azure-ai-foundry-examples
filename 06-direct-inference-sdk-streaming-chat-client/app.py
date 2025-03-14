@@ -1,10 +1,13 @@
 import sys
 import os
 import logging
+import asyncio
 from dotenv import load_dotenv
 import pathlib
 
-from openai import AzureOpenAI
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
+from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import ClientAuthenticationError, ServiceRequestError
 
 # Load environment variables from .env file
@@ -25,12 +28,12 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler(log_file)],
 )
-logger = logging.getLogger("azure_openai_chat")
+logger = logging.getLogger("azure_ai_inference_streaming_chat")
 
 
 def get_endpoint_and_key():
     """
-    Retrieve and validate the Azure OpenAI endpoint and API key from environment variables.
+    Retrieve and validate the Azure AI Inference endpoint and API key from environment variables.
 
     Returns:
         tuple: (endpoint, api_key) or (None, None) if validation fails
@@ -59,20 +62,41 @@ def get_endpoint_and_key():
     return endpoint, api_key
 
 
-def run_chat_loop(chat_client):
+def print_stream(result):
     """
-    Run the interactive chat loop with the provided Azure OpenAI chat client.
-    Maintains conversation history for context.
+    Prints the chat completion with streaming.
+    """
+    full_response = ""
+    usage_info = None
+    
+    for chunk in result:
+        if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+            content = chunk.choices[0].delta.content
+            print(content, end="", flush=True)
+            full_response += content
+        
+        # Capture usage information if available
+        if hasattr(chunk, 'usage') and chunk.usage:
+            usage_info = chunk.usage
+    
+    print("\n")  # Add a newline after the streaming response
+    return full_response, usage_info
+
+
+async def run_chat_loop(chat_client):
+    """
+    Run the interactive chat loop with the provided Azure AI Inference chat client.
+    Maintains conversation history for context and demonstrates streaming responses.
 
     Args:
-        chat_client: The Azure OpenAI client
+        chat_client: The Azure AI Inference chat completions client
     """
     # Initialize conversation history with system message
     system_message = "You are a helpful AI assistant that answers questions."
-    conversation_history = [{"role": "system", "content": system_message}]
+    conversation_history = [SystemMessage(content=system_message)]
 
     logger.info("Starting chat conversation loop")
-    print("\n===== Azure OpenAI Chat Client =====")
+    print("\n===== Azure AI Inference Streaming Chat Client =====")
     print(
         "Starting a new conversation. Type 'quit' to quit or 'clear' to reset conversation history.\n"
     )
@@ -89,7 +113,7 @@ def run_chat_loop(chat_client):
 
         if user_prompt.lower() in ["clear"]:
             logger.info("User requested to clear conversation history")
-            conversation_history = [{"role": "system", "content": system_message}]
+            conversation_history = [SystemMessage(content=system_message)]
             print("Conversation history cleared. Starting fresh.")
             continue
 
@@ -99,42 +123,42 @@ def run_chat_loop(chat_client):
             continue
 
         # Add user message to history
-        conversation_history.append({"role": "user", "content": user_prompt})
+        conversation_history.append(UserMessage(content=user_prompt))
 
         logger.debug(f"User prompt: {user_prompt}")
         logger.debug(f"Conversation history length: {len(conversation_history)}")
-        print("Generating response...")
+        print("Generating response (streaming)...")
 
         try:
-            # Send the request to the model using the OpenAI client
-            logger.info("Sending request to model")
-            response = chat_client.chat.completions.create(
-                model=chat_client.deployment_name, 
+            # Send the streaming request to the model
+            logger.info("Sending streaming request to model")
+            print("\nResponse:")
+            
+            # Send the request to the model with streaming enabled
+            stream = chat_client.complete(
                 messages=conversation_history,
                 max_tokens=4096,
                 temperature=0.7,
                 top_p=1,
-                stop=None
+                stream=True
             )
-
-            # Get the assistant's response
-            assistant_response = response.choices[0].message.content
-
+            
+            # Process the streaming response using the helper function
+            full_response, usage_info = print_stream(stream)
+            
             # Add assistant response to history
             conversation_history.append(
-                {"role": "assistant", "content": assistant_response}
+                AssistantMessage(content=full_response)
             )
 
-            logger.debug(f"Response received: {assistant_response[:50]}...")
-            print("\nResponse:")
-            print(assistant_response)
+            logger.debug(f"Response received: {full_response[:50]}...")
             
             # Print usage information if available
-            if hasattr(response, 'usage') and response.usage:
+            if usage_info:
                 print("\nUsage:")
-                print(f"  Prompt tokens: {response.usage.prompt_tokens}")
-                print(f"  Completion tokens: {response.usage.completion_tokens}")
-                print(f"  Total tokens: {response.usage.total_tokens}")
+                print(f"  Prompt tokens: {usage_info.prompt_tokens}")
+                print(f"  Completion tokens: {usage_info.completion_tokens}")
+                print(f"  Total tokens: {usage_info.total_tokens}")
                 
             print("\n" + "-" * 50 + "\n")
 
@@ -145,55 +169,34 @@ def run_chat_loop(chat_client):
 
 def initialize_client(endpoint, api_key):
     """
-    Initialize the Azure OpenAI client.
+    Initialize the Azure AI Inference chat client.
 
     Args:
         endpoint: The validated endpoint URL
         api_key: The validated API key
 
     Returns:
-        The Azure OpenAI client or None if initialization fails
+        The chat completions client or None if initialization fails
     """
     try:
-        logger.info("Creating Azure OpenAI client...")
-        print("Creating Azure OpenAI client...")
+        logger.info("Creating Azure AI Inference chat client...")
+        print("Creating Azure AI Inference chat client...")
 
-        # Extract deployment name from the endpoint URL
-        # Example endpoint: https://<resource-name>.openai.azure.com/openai/deployments/<deployment-name>/
-        import re
-        from urllib.parse import urlparse
-
-        # Extract the deployment name
-        deployment_match = re.search(r'/deployments/([^/]+)', endpoint)
-        if not deployment_match:
-            error_msg = "Deployment name not found in endpoint URL. The endpoint URL should include '/deployments/<deployment-name>/'."
-            logger.error(error_msg)
-            print(error_msg)
-            raise ValueError(error_msg)
-            
-        deployment_name = deployment_match.group(1)
-        
-        # Extract the base endpoint (just the scheme and netloc)
-        parsed_url = urlparse(endpoint)
-        base_endpoint = f"{parsed_url.scheme}://{parsed_url.netloc}/"
-        
-        logger.info(f"Extracted base endpoint: {base_endpoint}")
-        print(f"Extracted base endpoint: {base_endpoint}")
-
-        # Create the Azure OpenAI client
-        chat_client = AzureOpenAI(
-            api_key=api_key,
-            api_version="2024-10-21",
-            azure_endpoint=base_endpoint
+        chat_client = ChatCompletionsClient(
+            endpoint=endpoint,
+            credential=AzureKeyCredential(api_key)
         )
 
-        # Store the deployment name as an attribute of the client for later use
-        chat_client.deployment_name = deployment_name
-
-        logger.info(f"Connected successfully! Using deployment: {deployment_name}")
-        print(f"Connected successfully to Azure OpenAI client! Using deployment: {deployment_name}")
+        logger.info("Connected successfully!")
+        print("Connected successfully to Azure AI Inference chat client!")
         return chat_client
 
+    except ClientAuthenticationError as auth_error:
+        logger.error(f"Authentication error: {auth_error}")
+        print(f"Authentication error: {auth_error}")
+    except ServiceRequestError as req_error:
+        logger.error(f"Service request error: {req_error}")
+        print(f"Service request error: {req_error}")
     except Exception as ex:
         logger.error(f"An unexpected error occurred: {ex}", exc_info=True)
         print(f"An unexpected error occurred: {ex}")
@@ -201,9 +204,9 @@ def initialize_client(endpoint, api_key):
     return None
 
 
-def main():
-    """Main entry point for the application."""
-    logger.info("=== Azure OpenAI Chat Client ===")
+async def main_async():
+    """Asynchronous main entry point for the application."""
+    logger.info("=== Azure AI Inference Streaming Chat Client ===")
     logger.info("See README.md for setup instructions")
 
     print("Initializing client...")
@@ -220,17 +223,22 @@ def main():
 
     # Run the chat loop
     try:
-        run_chat_loop(chat_client)
+        await run_chat_loop(chat_client)
     except Exception as ex:
         logger.error(f"An error occurred during chat: {ex}", exc_info=True)
         print(f"Error: An error occurred during chat")
         print(f"Details: {ex}")
 
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the application."""
     try:
-        main()
+        asyncio.run(main_async())
     except KeyboardInterrupt:
         logger.info("Operation cancelled by user")
         print("\nOperation cancelled by user. Exiting...")
         sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

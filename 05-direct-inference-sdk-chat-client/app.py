@@ -4,7 +4,8 @@ import logging
 from dotenv import load_dotenv
 import pathlib
 
-from openai import AzureOpenAI
+from azure.ai.inference import ChatCompletionsClient
+from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import ClientAuthenticationError, ServiceRequestError
 
 # Load environment variables from .env file
@@ -25,12 +26,12 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler(log_file)],
 )
-logger = logging.getLogger("azure_openai_chat")
+logger = logging.getLogger("azure_ai_inference_chat")
 
 
 def get_endpoint_and_key():
     """
-    Retrieve and validate the Azure OpenAI endpoint and API key from environment variables.
+    Retrieve and validate the Azure AI Inference endpoint and API key from environment variables.
 
     Returns:
         tuple: (endpoint, api_key) or (None, None) if validation fails
@@ -61,18 +62,18 @@ def get_endpoint_and_key():
 
 def run_chat_loop(chat_client):
     """
-    Run the interactive chat loop with the provided Azure OpenAI chat client.
+    Run the interactive chat loop with the provided Azure AI Inference chat client.
     Maintains conversation history for context.
 
     Args:
-        chat_client: The Azure OpenAI client
+        chat_client: The Azure AI Inference chat completions client
     """
     # Initialize conversation history with system message
     system_message = "You are a helpful AI assistant that answers questions."
     conversation_history = [{"role": "system", "content": system_message}]
 
     logger.info("Starting chat conversation loop")
-    print("\n===== Azure OpenAI Chat Client =====")
+    print("\n===== Azure AI Inference Chat Client =====")
     print(
         "Starting a new conversation. Type 'quit' to quit or 'clear' to reset conversation history.\n"
     )
@@ -106,16 +107,18 @@ def run_chat_loop(chat_client):
         print("Generating response...")
 
         try:
-            # Send the request to the model using the OpenAI client
+            # Prepare the payload with the complete conversation history for context
             logger.info("Sending request to model")
-            response = chat_client.chat.completions.create(
-                model=chat_client.deployment_name, 
-                messages=conversation_history,
-                max_tokens=4096,
-                temperature=0.7,
-                top_p=1,
-                stop=None
-            )
+            payload = {
+                "messages": conversation_history,
+                "max_tokens": 4096,
+                "temperature": 0.7,
+                "top_p": 1,
+                "stop": []
+            }
+            
+            # Send the request to the model
+            response = chat_client.complete(payload)
 
             # Get the assistant's response
             assistant_response = response.choices[0].message.content
@@ -145,55 +148,34 @@ def run_chat_loop(chat_client):
 
 def initialize_client(endpoint, api_key):
     """
-    Initialize the Azure OpenAI client.
+    Initialize the Azure AI Inference chat client.
 
     Args:
         endpoint: The validated endpoint URL
         api_key: The validated API key
 
     Returns:
-        The Azure OpenAI client or None if initialization fails
+        The chat completions client or None if initialization fails
     """
     try:
-        logger.info("Creating Azure OpenAI client...")
-        print("Creating Azure OpenAI client...")
+        logger.info("Creating Azure AI Inference chat client...")
+        print("Creating Azure AI Inference chat client...")
 
-        # Extract deployment name from the endpoint URL
-        # Example endpoint: https://<resource-name>.openai.azure.com/openai/deployments/<deployment-name>/
-        import re
-        from urllib.parse import urlparse
-
-        # Extract the deployment name
-        deployment_match = re.search(r'/deployments/([^/]+)', endpoint)
-        if not deployment_match:
-            error_msg = "Deployment name not found in endpoint URL. The endpoint URL should include '/deployments/<deployment-name>/'."
-            logger.error(error_msg)
-            print(error_msg)
-            raise ValueError(error_msg)
-            
-        deployment_name = deployment_match.group(1)
-        
-        # Extract the base endpoint (just the scheme and netloc)
-        parsed_url = urlparse(endpoint)
-        base_endpoint = f"{parsed_url.scheme}://{parsed_url.netloc}/"
-        
-        logger.info(f"Extracted base endpoint: {base_endpoint}")
-        print(f"Extracted base endpoint: {base_endpoint}")
-
-        # Create the Azure OpenAI client
-        chat_client = AzureOpenAI(
-            api_key=api_key,
-            api_version="2024-10-21",
-            azure_endpoint=base_endpoint
+        chat_client = ChatCompletionsClient(
+            endpoint=endpoint,
+            credential=AzureKeyCredential(api_key)
         )
 
-        # Store the deployment name as an attribute of the client for later use
-        chat_client.deployment_name = deployment_name
-
-        logger.info(f"Connected successfully! Using deployment: {deployment_name}")
-        print(f"Connected successfully to Azure OpenAI client! Using deployment: {deployment_name}")
+        logger.info("Connected successfully!")
+        print("Connected successfully to Azure AI Inference chat client!")
         return chat_client
 
+    except ClientAuthenticationError as auth_error:
+        logger.error(f"Authentication error: {auth_error}")
+        print(f"Authentication error: {auth_error}")
+    except ServiceRequestError as req_error:
+        logger.error(f"Service request error: {req_error}")
+        print(f"Service request error: {req_error}")
     except Exception as ex:
         logger.error(f"An unexpected error occurred: {ex}", exc_info=True)
         print(f"An unexpected error occurred: {ex}")
@@ -203,7 +185,7 @@ def initialize_client(endpoint, api_key):
 
 def main():
     """Main entry point for the application."""
-    logger.info("=== Azure OpenAI Chat Client ===")
+    logger.info("=== Azure AI Inference Chat Client ===")
     logger.info("See README.md for setup instructions")
 
     print("Initializing client...")

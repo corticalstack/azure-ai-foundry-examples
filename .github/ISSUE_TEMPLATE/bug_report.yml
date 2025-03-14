@@ -51,10 +51,14 @@ body:
       label: Example Project
       description: Refer to any specific example?
       options:
-        - 01-project-based-model-inference-chat-client
-        - 02-project-based-openai-chat-client
-        - 03-direct-inference-sdk-chat-client
-        - 04-azure-openai-sdk-chat-client
+        - 01-explore-your-ai-foundry-environment
+        - 02-project-based-model-inference-chat-client
+        - 03-project-based-openai-chat-client
+        - 04-direct-inference-sdk-chat-client
+        - 05-azure-openai-sdk-chat-client
+        - 06-inference-prompt-template
+        - 07-inference-prompty-file
+        - 08-ai-search-index
         - Other (please specify in environment details)
     validations:
       required: true
