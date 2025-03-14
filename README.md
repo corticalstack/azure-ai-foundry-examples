@@ -1,6 +1,6 @@
 # 🤖 Azure AI Foundry Examples
 
-This repository contains examples demonstrating how to use Azure AI Foundry services.
+This repository contains examples demonstrating how to work with Azure AI Foundry and it's assets.
 
 ## 🔧 Prerequisites
 
@@ -8,29 +8,29 @@ To run the examples in this repository, you'll need to have the following resour
 
 - A text generation model like gpt-4o-mini
 - An embedding model like text-embedding-3-small
-- An AI search service
+- An AI search service (ideally with the semantic reanker option enabled)
 
 Make sure these resources are properly deployed and configured before running the examples.
 
 ## 📚 Examples
 
-1️⃣ [01-explore-your-ai-foundry-environment](./01-explore-your-ai-foundry-environment/explore-your-ai-foundry-environment.ipynb): A notebook to explore your Azure AI Foundry environment and verify your connections.
+1️⃣ [01-explore-your-ai-foundry-environment](./01-explore-your-ai-foundry-environment/explore-your-ai-foundry-environment.ipynb): A notebook to explore your Azure AI Foundry environment, connections, and assets.
 
-2️⃣ [02-project-based-model-inference-chat-client](./02-project-based-model-inference-chat-client/README.md): A simple example application demonstrating how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
+2️⃣ [02-project-based-model-inference-chat-client](./02-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
 
-3️⃣ [03-project-based-openai-chat-client](./03-project-based-openai-chat-client/README.md): An example application demonstrating how to use the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
+3️⃣ [03-project-based-openai-chat-client](./03-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
 
-4️⃣ [04-azure-openai-sdk-chat-client](./04-azure-openai-sdk-chat-client/README.md): An example application demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
+4️⃣ [04-azure-openai-sdk-chat-client](./04-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
 
-5️⃣ [05-direct-inference-sdk-chat-client](./05-direct-inference-sdk-chat-client/README.md): An example application demonstrating how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
+5️⃣ [05-direct-inference-sdk-chat-client](./05-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
 
-6️⃣ [06-direct-inference-sdk-streaming-chat-client](./06-direct-inference-sdk-streaming-chat-client/README.md): An example application demonstrating how to use the Azure AI Inference SDK to create a chat client with asynchronous streaming responses.
+6️⃣ [06-direct-inference-sdk-streaming-chat-client](./06-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
 
-7️⃣ [07-direct-inference-with-prompt-template](./07-direct-inference-with-prompt-template/README.md): An example application demonstrating how to use the Azure AI Inference SDK with prompt templates.
+7️⃣ [07-direct-inference-with-prompt-template](./07-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
 
-8️⃣ [08-direct-inference-with-prompty-file](./08-direct-inference-with-prompty-file/README.md): An example application demonstrating how to use the Azure AI Inference SDK with .prompty files to load prompt templates, model names, and parameters.
+8️⃣ [08-direct-inference-with-prompty-file](./08-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
 
-9️⃣ [09-project-based-ai-search](./09-project-based-ai-search/README.md): An example demonstrating how to use Azure AI Search with an Azure AI Foundry project to create a search index, upload documents, and perform search operations.
+9️⃣ [09-project-based-ai-search](./09-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
 
 ## 🛠️ Setup Guide
 
@@ -43,7 +43,7 @@ Make sure these resources are properly deployed and configured before running th
 This repository includes a development container configuration that sets up all necessary dependencies automatically. The dev container is configured to work with all examples in this repository.
 
 1. ✅ Open the project folder in VS Code
-2. ✅ When prompted, click "Reopen in Container" or use the command palette (F1) and select *Dev Containers: Reopen in Container*
+2. ✅ When prompted, click "Reopen in Container" or use the command palette and select *Dev Containers: Reopen in Container*
 3. ✅ VS Code will build the container and set up the environment (this may take a few minutes the first time)
 4. ✅ Once the container is running, you'll have a fully configured environment with all dependencies installed
 5. ✅ The dev container includes the Azure CLI for authentication. Use `az login` to authenticate with your Azure account
@@ -96,7 +96,7 @@ The examples use Python's built-in logging module to log information at differen
 - **ERROR**: Due to a more serious problem, the application has not been able to perform a function
 - **CRITICAL**: A serious error, indicating that the application itself may be unable to continue running
 
-Logs are written to example-specific log files in the application directory to avoid polluting the output.
+Logs are written to example-specific log files in the application directory to avoid polluting the example output.
 
 ## 👨‍💻 Contributing
 
