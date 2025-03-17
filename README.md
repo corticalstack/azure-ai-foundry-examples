@@ -14,7 +14,7 @@ Make sure these resources are properly deployed and configured before running th
 
 ## 📚 Examples
 
-1️⃣ [01-explore-your-ai-foundry-environment](./01-explore-your-ai-foundry-environment/explore-your-ai-foundry-environment.ipynb): A notebook to explore your Azure AI Foundry environment, connections, and assets.
+1️⃣ [01-explore-hub-and-projects](./01-explore-hub-and-projects/explore-hub-and-projects.ipynb): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
 
 2️⃣ [02-project-based-model-inference-chat-client](./02-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
 
@@ -113,6 +113,11 @@ Contributions and suggestions are welcome! Please see the [contributing guidelin
 <details>
 <summary><strong>What is Azure AI Foundry?</strong></summary>
 A successor to Azure AI Studio, it's a home for AI capabilities including a collection of tools and services to fully create, manage, and use AI models at scale for data scientists and AI engineers.
+</details>
+
+<details>
+<summary><strong>What is the difference between an Azure AI Foundry hub and project?</strong></summary>
+A Hub is a parent workspace that provides shared resources including storage, key vault, and compute for multiple child Projects. Projects are lighter weight workspaces for managing AI components that inherit and use the Hub's resources. Think of Hubs as infrastructure and resource providers and Projects as workspaces for specific AI development efforts.
 </details>
 
 <details>
