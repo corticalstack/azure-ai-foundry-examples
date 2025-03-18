@@ -25,7 +25,7 @@ AZURE_INFERENCE_API_KEY=your-api-key
 1. Make sure you've configured your `.env` file as described above
 2. Run the application:
    ```bash
-   python 05-direct-inference-sdk-chat-client/app.py
+   python 06-direct-inference-sdk-chat-client/app.py
    ```
 3. Enter your questions when prompted
 4. The application maintains conversation history for context, so follow-up questions work naturally

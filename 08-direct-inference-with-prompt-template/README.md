@@ -25,7 +25,7 @@ AZURE_INFERENCE_API_KEY=your-api-key
 1. Make sure you've configured your `.env` file as described above
 2. Run the application:
    ```bash
-   python 07-direct-inference-with-prompt-template/app.py
+   python 08-direct-inference-with-prompt-template/app.py
    ```
 3. The application will:
    - Create a prompt template with variables for first_name and last_name

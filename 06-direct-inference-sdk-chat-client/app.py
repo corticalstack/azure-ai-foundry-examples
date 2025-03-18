@@ -18,6 +18,15 @@ load_dotenv(dotenv_path=root_dir / ".env")
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 numeric_level = getattr(logging, log_level, logging.INFO)
 
+from azure.core.settings import settings 
+settings.tracing_implementation = "opentelemetry" 
+from azure.ai.inference.tracing import AIInferenceInstrumentor 
+
+# Instrument AI Inference API 
+
+AIInferenceInstrumentor().instrument() 
+os.environ["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"] = "true"
+
 # Get the directory name programmatically for the log file name
 dir_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 log_file = f"{dir_name}.log"
@@ -212,6 +221,7 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+        AIInferenceInstrumentor().uninstrument()
     except KeyboardInterrupt:
         logger.info("Operation cancelled by user")
         print("\nOperation cancelled by user. Exiting...")

@@ -9,6 +9,7 @@ This example showcases:
 - How to initialize the Azure AI Foundry project client
 - How to create a chat completions client for Azure AI model inference
 - How to send prompts and receive responses
+- How to implement tracing to monitor and log the AI model's performance, usage patterns, and content generation
 
 ## Setup and Configuration
 For detailed setup instructions including prerequisites, dev container usage, manual setup, and general environment configuration, please refer to the [main README](../README.md#%EF%B8%8F-setup-guide).

@@ -16,21 +16,23 @@ Make sure these resources are properly deployed and configured before running th
 
 1️⃣ [01-explore-hub-and-projects](./01-explore-hub-and-projects/explore-hub-and-projects.ipynb): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
 
-2️⃣ [02-project-based-model-inference-chat-client](./02-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
+2️⃣ [02-configure-tracing-project-based-model-inference](./02-configure-tracing-project-based-model-inference/README.md): Shows how to configure tracing for project-based model inference. See [example 03](./03-project-based-model-inference-chat-client/README.md) for implementation.
 
-3️⃣ [03-project-based-openai-chat-client](./03-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
+3️⃣ [03-project-based-model-inference-chat-client](./03-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
 
-4️⃣ [04-azure-openai-sdk-chat-client](./04-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
+4️⃣ [04-project-based-openai-chat-client](./04-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
 
-5️⃣ [05-direct-inference-sdk-chat-client](./05-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
+5️⃣ [05-azure-openai-sdk-chat-client](./05-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
 
-6️⃣ [06-direct-inference-sdk-streaming-chat-client](./06-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
+6️⃣ [06-direct-inference-sdk-chat-client](./06-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
 
-7️⃣ [07-direct-inference-with-prompt-template](./07-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
+7️⃣ [07-direct-inference-sdk-streaming-chat-client](./07-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
 
-8️⃣ [08-direct-inference-with-prompty-file](./08-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
+8️⃣ [08-direct-inference-with-prompt-template](./08-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
 
-9️⃣ [09-project-based-ai-search](./09-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
+9️⃣ [09-direct-inference-with-prompty-file](./09-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
+
+🔟 [10-project-based-ai-search](./10-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
 
 ## 🛠️ Setup Guide
 
@@ -117,7 +119,7 @@ A successor to Azure AI Studio, it's a home for AI capabilities including a coll
 
 <details>
 <summary><strong>What is the difference between an Azure AI Foundry hub and project?</strong></summary>
-A Hub is a parent workspace that provides shared resources including storage, key vault, and compute for multiple child Projects. Projects are lighter weight workspaces for managing AI components that inherit and use the Hub's resources. Think of Hubs as infrastructure and resource providers and Projects as workspaces for specific AI development efforts.
+A hub is a parent workspace that provides shared resources including storage, key vault, and compute for multiple child projects. Projects are lighter weight workspaces for managing AI components that inherit and use the hub's resources. Think of hubs as infrastructure and resource providers and projects as workspaces for specific AI development efforts.
 </details>
 
 <details>
@@ -146,4 +148,10 @@ While `azure.ai.inference` provides a model-agnostic abstraction layer, the open
 In summary, the key benefit of `azure.ai.inference` is the ability to switch between supported models, for example between an OpenAI and Meta model, without modifying your application code, avoiding code lock-in.
 
 Verify model compatibility via the [inference API documentation](https://learn.microsoft.com/en-us/azure/machine-learning/reference-model-inference-api?view=azureml-api-2&tabs=python).
+</details>
+
+<details>
+<summary><strong>What is RAG?</strong></summary>
+Retrieval-Augmented Generation (RAG) is a technique where the LLM (Large Language Model) uses relevant retrieved text chunks from your data to craft a final answer.
+This helps ground the model's response in real data, reducing hallucinations.
 </details>

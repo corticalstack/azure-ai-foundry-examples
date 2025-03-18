@@ -1,4 +1,4 @@
-# Azure AI Inference SDK Streaming Chat Client Example (06)
+# Azure AI Inference SDK Streaming Chat Client Example (07)
 
 ## Introduction
 This is a simple example application demonstrating how to use the Azure AI Inference SDK to create a chat client that connects directly to an Azure AI Inference endpoint, sends message history to a language model, and displays the response using **asynchronous streaming**.
@@ -6,7 +6,7 @@ This is a simple example application demonstrating how to use the Azure AI Infer
 **Important distinction**: This example specifically demonstrates model consumption with the **Azure AI Inference SDK** using **streaming responses**: Models are consumed through a direct connection to an Azure AI Inference endpoint using an API key, with responses streamed back in real-time as they are generated.
 
 ## Key Streaming Features
-This example differs from the non-streaming example (05-direct-inference-sdk-chat-client) in the following ways:
+This example differs from the non-streaming example (06-direct-inference-sdk-chat-client) in the following ways:
 
 1. **Asynchronous Code**: Uses Python's `asyncio` to handle asynchronous operations
 2. **Streaming Responses**: Enables streaming by setting `stream=True` in the client.complete call
@@ -28,7 +28,7 @@ AZURE_INFERENCE_API_KEY=your-api-key
 1. Make sure you've configured your `.env` file as described above
 2. Run the application:
    ```bash
-   python 06-direct-inference-sdk-streaming-chat-client/app.py
+   python 07-direct-inference-sdk-streaming-chat-client/app.py
    ```
 3. Enter your questions when prompted
 4. Watch as the response is streamed back in real-time, token by token

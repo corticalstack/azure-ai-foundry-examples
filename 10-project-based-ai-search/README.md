@@ -22,4 +22,3 @@ You can this in the Azure AI Foundry portal:
 1. Go to your project in the Azure AI Foundry portal
 2. Click on 'Project settings'
 3. Look for the project connection string information
-

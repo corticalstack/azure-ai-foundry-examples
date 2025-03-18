@@ -6,15 +6,26 @@ from dotenv import load_dotenv
 from typing import Optional, Tuple
 import pathlib
 
+from azure.core.settings import settings
+from azure.ai.inference.tracing import AIInferenceInstrumentor 
+
 from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError, ServiceRequestError
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry.trace import get_tracer
 
 # Load environment variables from .env file
 # Look for .env in the current directory and parent directory
 current_dir = pathlib.Path(__file__).parent.absolute()
 root_dir = current_dir.parent
 load_dotenv(dotenv_path=root_dir / ".env")
+
+# Instrument AI Inference API
+os.environ["AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED"] = "true"
+settings.tracing_implementation = "opentelemetry"
+AIInferenceInstrumentor().instrument()
+tracer = get_tracer(__name__)
 
 # Configure logging - only to file, not to console to avoid polluting chat output
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -71,7 +82,6 @@ def get_project_connection_string() -> Optional[str]:
         return None
 
     return conn_str
-
 
 def run_chat_loop(chat_client):
     """
@@ -164,7 +174,14 @@ def initialize_client(connection_string):
             conn_str=connection_string,
         )
 
-        # Get a chat client
+        application_insights_connection_string = project_client.telemetry.get_connection_string()
+        if not application_insights_connection_string:
+            logger.warning(
+                "No application insights configured, telemetry will not be logged to project."
+            )
+           
+        configure_azure_monitor(connection_string=application_insights_connection_string)
+        
         logger.info("Creating AI Foundry AI Model inference completion client...")
         chat_client = project_client.inference.get_chat_completions_client()
 
@@ -216,6 +233,7 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+        AIInferenceInstrumentor().uninstrument()
     except KeyboardInterrupt:
         logger.info("Operation cancelled by user")
         print("\nOperation cancelled by user. Exiting...")
