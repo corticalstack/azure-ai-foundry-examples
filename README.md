@@ -14,25 +14,27 @@ Make sure these resources are properly deployed and configured before running th
 
 ## 📚 Examples
 
-1️⃣ [01-explore-hub-and-projects](./01-explore-hub-and-projects/explore-hub-and-projects.ipynb): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
+🧮 [01-explore-hub-and-projects](./01-explore-hub-and-projects/explore-hub-and-projects.ipynb): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
 
-2️⃣ [02-configure-tracing-project-based-model-inference](./02-configure-tracing-project-based-model-inference/README.md): Shows how to configure tracing for project-based model inference. See [example 03](./03-project-based-model-inference-chat-client/README.md) for implementation.
+🧮 [02-configure-tracing-project-based-model-inference](./02-configure-tracing-project-based-model-inference/README.md): Shows how to configure tracing for project-based model inference. See [example 03](./03-project-based-model-inference-chat-client/README.md) for implementation.
 
-3️⃣ [03-project-based-model-inference-chat-client](./03-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
+🧮 [03-project-based-model-inference-chat-client](./03-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
 
-4️⃣ [04-project-based-openai-chat-client](./04-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
+🧮 [04-project-based-openai-chat-client](./04-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
 
-5️⃣ [05-azure-openai-sdk-chat-client](./05-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
+🧮 [05-azure-openai-sdk-chat-client](./05-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
 
-6️⃣ [06-direct-inference-sdk-chat-client](./06-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
+🧮 [06-direct-inference-sdk-chat-client](./06-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
 
-7️⃣ [07-direct-inference-sdk-streaming-chat-client](./07-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
+🧮 [07-direct-inference-sdk-streaming-chat-client](./07-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
 
-8️⃣ [08-direct-inference-with-prompt-template](./08-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
+🧮 [08-direct-inference-with-prompt-template](./08-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
 
-9️⃣ [09-direct-inference-with-prompty-file](./09-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
+🧮 [09-direct-inference-with-prompty-file](./09-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
 
-🔟 [10-project-based-ai-search](./10-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
+🧮 [10-project-based-ai-search](./10-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
+
+🧮 [11-basic-rag](./11-basic-rag/README.md): A Jupyter notebook demonstrating a basic Retrieval-Augmented Generation (RAG) pattern implementation using an Azure AI Foundry project, an embedding model, a text generation model, and Azure AI Search, for space facts Q&A.
 
 ## 🛠️ Setup Guide
 
