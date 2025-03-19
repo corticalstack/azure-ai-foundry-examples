@@ -36,6 +36,8 @@ Make sure these resources are properly deployed and configured before running th
 
 🧮 [11-basic-rag](./11-basic-rag/README.md): A Jupyter notebook demonstrating a basic Retrieval-Augmented Generation (RAG) pattern implementation using an Azure AI Foundry project, an embedding model, a text generation model, and Azure AI Search, for space facts Q&A.
 
+🧮 [12-safe-ai](./12-safe-ai/README.md): A Jupyter notebook demonstrating how to use Azure Content Safety to moderate text content with interactive widgets for adjusting moderation settings and testing different text inputs.
+
 ## 🛠️ Setup Guide
 
 ### Requirements Management
