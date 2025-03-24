@@ -101,7 +101,7 @@ Logs are written to example-specific log files in the application directory to a
 
 Contributions and suggestions are welcome! Please see the [contributing guidelines](CONTRIBUTING.md) for details.
 
-## 📖 Supplementary Documentation
+## 📖 Resources
 
 - [Introducing Azure AI Foundry](https://www.youtube.com/watch?v=GD7MnIwAxYM)
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-foundry)
