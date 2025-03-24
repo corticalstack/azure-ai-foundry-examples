@@ -1,6 +1,6 @@
 # 🤖 Azure AI Foundry Examples
 
-This repository contains examples demonstrating how to work with Azure AI Foundry and it's assets.
+This repository contains examples demonstrating how to work with Azure AI Foundry and it's assets. AI Foundry is accessed at [ai.azure.com](http://ai.azure.com)
 
 ## 🔧 Prerequisites
 
@@ -110,6 +110,7 @@ Contributions and suggestions are welcome! Please see the [contributing guidelin
 
 ## 📖 Supplementary Documentation
 
+- [Introducing Azure AI Foundry](https://www.youtube.com/watch?v=GD7MnIwAxYM)
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-foundry)
 - [Azure AI Inference API Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/reference-model-inference-api?view=azureml-api-2&tabs=python)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
@@ -124,6 +125,8 @@ A successor to Azure AI Studio, it's a home for AI capabilities including a coll
 <details>
 <summary><strong>What is the difference between an Azure AI Foundry hub and project?</strong></summary>
 A hub is a parent workspace that provides shared resources including storage, key vault, and compute for multiple child projects. Projects are lighter weight workspaces for managing AI components that inherit and use the hub's resources. Think of hubs as infrastructure and resource providers and projects as workspaces for specific AI development efforts.
+
+A hub can have many projects, but a project can have only 1 parent hub. A project can have it's own data, connections, and model deployements that are isolated to the project itself, and not part of the hub.
 </details>
 
 <details>

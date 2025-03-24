@@ -8,7 +8,6 @@ import pathlib
 
 from azure.core.settings import settings
 from azure.ai.inference.tracing import AIInferenceInstrumentor 
-
 from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError, ServiceRequestError
