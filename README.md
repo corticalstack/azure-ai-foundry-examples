@@ -31,6 +31,8 @@ Make sure these resources are properly deployed and configured before running th
 
 🧮 [08_agents](./08_agents/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry, including a personal learning coach, grounding with Bing search, code interpreter, file search, and function calling capabilities.
 
+🧮 [09_agents_with_semantic_kernel](./09_agents_with_semantic_kernel/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry and Semantic Kernel, including interactive chat, code interpreter for data visualization, and file search capabilities.
+
 ## 🛠️ Setup Guide
 
 ### Requirements Management
@@ -107,6 +109,7 @@ Contributions and suggestions are welcome! Please see the [contributing guidelin
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-foundry)
 - [Azure AI Inference API Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/reference-model-inference-api?view=azureml-api-2&tabs=python)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
+- [Semantic Kernel GitHub repo](https://github.com/microsoft/semantic-kernel)
 
 ## ❓ FAQ
 
@@ -154,4 +157,9 @@ Verify model compatibility via the [inference API documentation](https://learn.m
 <summary><strong>What is RAG?</strong></summary>
 Retrieval-Augmented Generation (RAG) is a technique where the LLM (Large Language Model) uses relevant retrieved text chunks from your data to craft a final answer.
 This helps ground the model's response in real data, reducing hallucinations.
+</details>
+
+<details>
+<summary><strong>What is Semantic Kernel?</strong></summary>
+Semantic Kernel is a lightweight, open-source development kit that lets you easily build AI agents and integrate the latest AI models into your C#, Python, or Java codebase. It serves as an efficient middleware that enables rapid delivery of enterprise-grade solutions.
 </details>
