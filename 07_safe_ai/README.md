@@ -6,7 +6,7 @@ This folder contains a Jupyter notebook that demonstrates how to use Azure Conte
 The example shows how to:
 
 1. Connect to Azure AI Services for content moderation
-2. Define content categories for moderation (Hate, Self Harm, Sexual, Violence)
+2. Define content categories for moderation (*Hate*, *Self Harm*, *Sexual*, *Violence*)
 3. Set up threshold values for different content categories
 4. Analyze text content for potentially harmful material
 5. Make accept/reject decisions based on moderation results

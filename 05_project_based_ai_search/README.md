@@ -18,7 +18,7 @@ This example requires setting the following specific environment variable in `.e
 AZURE_AI_FOUNDRY_PROJECT_CONNECTION_STRING=your-actual-connection-string
 ```
 
-You can this in the Azure AI Foundry portal:
+You can find this in the Azure AI Foundry portal:
 1. Go to your project in the Azure AI Foundry portal
-2. Click on 'Project settings'
+2. Click on *Project settings*
 3. Look for the project connection string information

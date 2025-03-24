@@ -1,6 +1,6 @@
 # 👨‍💻 Contributing
 
-This repository welcomes contributions and suggestions! These are examples for Azure AI Foundry services. Please read through the contributing guide below to ensure a smooth contribution process.
+This repository welcomes contributions and suggestions! These are examples for working with Azure AI Foundry services. Please read through the contributing guide below to ensure a smooth contribution process.
 
 ---
 
@@ -12,13 +12,13 @@ Please be respectful and considerate, the aim is to foster an open and welcoming
 
 ## 🎯 Goals
 
-This repository contains examples that demonstrate how to use Azure AI Foundry services.
+This repository contains examples that demonstrate how to use Azure AI Foundry services. It will continue to evolve as the new features are added.
 
 ---
 
 ## 🐛 Issues
 
-All forms of feedback are welcome through [issues](https://github.com/corticalstack/azure-ai-foundry-examples/issues/new/choose). We provide templates for bug reports and feature requests to help you provide all the necessary information. Please select the appropriate template and fill it out as completely as possible.
+Feedback are welcome through [issues](https://github.com/corticalstack/azure-ai-foundry-examples/issues/new/choose). Templates are provided for bug reports and feature requests to help you provide all the necessary information. Please select the appropriate template and fill it out as completely as possible.
 
 ---
 

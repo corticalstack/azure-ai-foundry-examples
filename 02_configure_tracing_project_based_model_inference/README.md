@@ -11,12 +11,12 @@ This example demonstrates how to set up tracing for Azure AI Foundry project-bas
 ## Setting Up Tracing in the Azure AI Foundry Portal
 
 1. Navigate to your Azure AI Foundry project in the Azure portal
-2. Select the "Tracing" option in the project settings
+2. Select the *Tracing* option in the project settings
 3. Connect an existing Application Insights resource to your project, or create one in-situ.
 
 ## How Tracing is Implemented in the Code
 
-The tracing implementation in `03-project-based-model-inference-chat-client/app.py` follows these steps:
+The tracing implementation in `03_chat/chat_project_based_model_inference.py` follows these steps:
 
 ### 1. Import Required Libraries
 
@@ -89,4 +89,4 @@ if __name__ == "__main__":
 
 For more information on tracing with Azure AI Foundry, see the [official documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-local-sdk?tabs=python).
 
-Note: The implementation in this example represents a working configuration that has been tested with Azure AI Foundry. While the official documentation provides general guidance, the specific implementation in `app.py` has been verified to work correctly.
+Note: The implementation in this example represents a working configuration that has been tested with Azure AI Foundry. While the official documentation provides general guidance, the specific implementation in `chat_project_based_model_inference.py` has been verified to work correctly.

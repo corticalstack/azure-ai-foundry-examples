@@ -9,40 +9,33 @@ To run the examples in this repository, you'll need to have the following resour
 - A text generation model like gpt-4o-mini
 - An embedding model like text-embedding-3-small
 - An AI search service (ideally with the semantic reanker option enabled)
+- An Application Insights data source
 
 Make sure these resources are properly deployed and configured before running the examples.
 
 ## 📚 Examples
 
-🧮 [01-explore-hub-and-projects](./01-explore-hub-and-projects/explore-hub-and-projects.ipynb): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
+🧮 [01_explore_hub_and_projects](./01_explore_hub_and_projects/README.md): A notebook to explore your Azure AI Foundry hub, associated projects, connections, and service deployments.
 
-🧮 [02-configure-tracing-project-based-model-inference](./02-configure-tracing-project-based-model-inference/README.md): Shows how to configure tracing for project-based model inference. See [example 03](./03-project-based-model-inference-chat-client/README.md) for implementation.
+🧮 [02_configure_tracing_project_based_model_inference](./02_configure_tracing_project_based_model_inference/README.md): Shows how to configure tracing for project-based model inference. See [this example](./03_chat/chat_project_based_model_inference.py) for implementation.
 
-🧮 [03-project-based-model-inference-chat-client](./03-project-based-model-inference-chat-client/README.md): A simple example showing how to use the Azure AI Foundry Python SDK to create a chat completion client via a foundry project for Azure AI model inference.
+🧮 [03_chat](./03_chat/README.md): A collection of examples demonstrating different ways to create chat applications using Azure AI Foundry assets, including a variety of SDKs with project-based model inference, project-based OpenAI, direct Azure OpenAI, and direct inference with and without streaming.
 
-🧮 [04-project-based-openai-chat-client](./04-project-based-openai-chat-client/README.md): Another simple example demonstrating using the Azure AI Foundry Python SDK to create an Azure OpenAI client via a foundry project for interacting with Azure OpenAI service.
+🧮 [04_chat_with_prompt_templates](./04_chat_with_prompt_templates/README.md): Examples demonstrating how to use prompt templates with Azure AI Foundry model assets, including programmatically created templates and templates loaded from .prompty files.
 
-🧮 [05-azure-openai-sdk-chat-client](./05-azure-openai-sdk-chat-client/README.md): An example demonstrating how to use the Azure OpenAI SDK to directly connect to a foundry-deployed Azure OpenAI endpoint using an API key.
+🧮 [05_project_based_ai_search](./05_project_based_ai_search/README.md): A notebook demonstrating how to use the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
 
-🧮 [06-direct-inference-sdk-chat-client](./06-direct-inference-sdk-chat-client/README.md): An example showing how to use the Azure AI Inference SDK to directly connect to an Azure AI Inference endpoint using an API key.
+🧮 [06_basic_rag](./06_basic_rag/README.md): A Jupyter notebook demonstrating a basic Retrieval-Augmented Generation (RAG) pattern implementation using an Azure AI Foundry project, an embedding model, a text generation model, and Azure AI Search, for space facts Q&A.
 
-🧮 [07-direct-inference-sdk-streaming-chat-client](./07-direct-inference-sdk-streaming-chat-client/README.md): An example chat app using the Azure AI Inference SDK with asynchronous streaming responses.
+🧮 [07_safe_ai](./07_safe_ai/README.md): A Jupyter notebook demonstrating how to use Azure Content Safety to moderate text content with interactive widgets for adjusting moderation settings and testing different text inputs.
 
-🧮 [08-direct-inference-with-prompt-template](./08-direct-inference-with-prompt-template/README.md): An example application showing how to use the Azure AI Inference SDK with prompt templates.
-
-🧮 [09-direct-inference-with-prompty-file](./09-direct-inference-with-prompty-file/README.md): An example using the Azure AI Inference SDK for text generation with .prompty files to load a prompt template containing a model configuration and system prompt.
-
-🧮 [10-project-based-ai-search](./10-project-based-ai-search/README.md): A notebook demonstrating how to the default Azure AI Search connected to an Azure AI Foundry project to create a search index, upload documents, and perform a variety of search operations including exact match, fuzzy, vector, similarity, and hybrid.
-
-🧮 [11-basic-rag](./11-basic-rag/README.md): A Jupyter notebook demonstrating a basic Retrieval-Augmented Generation (RAG) pattern implementation using an Azure AI Foundry project, an embedding model, a text generation model, and Azure AI Search, for space facts Q&A.
-
-🧮 [12-safe-ai](./12-safe-ai/README.md): A Jupyter notebook demonstrating how to use Azure Content Safety to moderate text content with interactive widgets for adjusting moderation settings and testing different text inputs.
+🧮 [08_agents](./08_agents/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry, including a personal learning coach, grounding with Bing search, code interpreter, file search, and function calling capabilities.
 
 ## 🛠️ Setup Guide
 
 ### Requirements Management
 
-- The root `requirements.txt` file includes all dependencies needed for all examples in the repository.
+The root `requirements.txt` file includes all dependencies needed for all examples in the repository.
 
 ### 🐳 Using the Dev Container
 
@@ -52,7 +45,7 @@ This repository includes a development container configuration that sets up all 
 2. ✅ When prompted, click "Reopen in Container" or use the command palette and select *Dev Containers: Reopen in Container*
 3. ✅ VS Code will build the container and set up the environment (this may take a few minutes the first time)
 4. ✅ Once the container is running, you'll have a fully configured environment with all dependencies installed
-5. ✅ The dev container includes the Azure CLI for authentication. Use `az login` to authenticate with your Azure account
+5. ✅ The dev container includes the Azure CLI for authentication. You can use `az login` to authenticate with your Azure account
 
 ### 🔧 Manual Setup (without Dev Container)
 
