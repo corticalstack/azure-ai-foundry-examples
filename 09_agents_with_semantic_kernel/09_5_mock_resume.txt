@@ -1,0 +1,37 @@
+JANE DOE
+Backend Software Engineer
+jane.doe@email.com | (555) 123-4567 | linkedin.com/in/janedoe | github.com/janedoe
+
+SKILLS
+- Programming Languages: Python, JavaScript, Java
+- Frameworks/Libraries: Django, Flask, Express.js
+- Tools: Git, Docker, Linux, Jupyter Notebook
+- Databases: PostgreSQL, MySQL
+
+EXPERIENCE
+Backend Engineer | EdTech Innovations | Mar 2021 - Present
+- Developed backend services for an educational platform serving 50K+ students
+- Built REST APIs using Flask and integrated with frontend applications
+- Implemented database optimization that improved query performance by 30%
+- Maintained Linux-based infrastructure for application deployment
+- Software Developer | Data Systems Corp. | Jun 2018 - Feb 2021
+- Created internal tools to help content teams manage learning materials
+- Built and maintained SQL databases for storing user progress and analytics
+- Collaborated with product managers to implement new features
+- Deployed applications using basic Docker containers
+
+EDUCATION
+- Master of Science in Computer Science | State University | 2018
+- Bachelor of Science in Software Engineering | Tech University | 2016
+
+PROJECTS
+- Learning Management System | github.com/janedoe/learning-platform
+- Backend system built with Django to manage educational content
+- Implemented user authentication and progress tracking features
+- API Development Tool | github.com/janedoe/api-toolkit
+- Python utility for testing and documenting REST APIs
+- Deployed as a containerized service with basic Docker implementation
+
+LANGUAGES
+- English (Fluent)
+- Basic Mandarin (Conversational)

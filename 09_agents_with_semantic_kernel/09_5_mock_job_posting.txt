@@ -1,0 +1,45 @@
+Want to use your backend skills to make an impact? AI is the new electricity. Millions of AI engineers are needed to transform industries with AI, particularly in the realm of GenAI, and we’re building education products to train them. 
+With a mission to grow and connect the global AI community, DeepLearning.AI is an education technology company that is empowering the global workforce to build an AI-powered future through world-class education, hands-on training, and 
+a collaborative community. We’re a small ed-tech company with serious credentials, exciting courses, and wonderful teammates.
+
+Deeplearning.ai is looking for a Backend Engineer with strong computer science fundamentals with a passion for improving learner's experiences. The ideal candidate will thrive in an early development stage of a leading educational environment focusing on AI-related topics.  As a Backend Engineer you will be responsible for building and delivering high-quality infrastructure and support to the technical content deeplearning.ai is providing. Our team is growing fast, and we are looking for a strong engineer to develop our educational products. In this role, you will work alongside a team of talented content creators as well as our outside partners, to build various layers of the infrastructure of world-renowned AI-driven education.
+
+This opportunity is for candidates based in Taipei.
+
+Here’s what you’ll do:
+Develop a learner-centered platform to deliver the best learning experience for the deeplearning.ai learners.
+Maintain quality and ensure responsiveness and scalability of the developed application.
+Design and develop internal tools to help our teams iterate quickly.
+Maintain a high-quality code base and write clear documentation.
+Develop backend infrastructure for grading tools and network training.
+
+Here are the experiences you should have:
+Broad and solid CS foundation knowledge, including data structures & algorithms, OS, computer networks, and databases.
+At least 5+ years of software development experience and have experience building end-to-end projects.
+
+Here are the skills you should have:
+At least 5+ years of software development experience and have experience in building end-to-end projects.
+5+ years of experience with general backend (Linux, SQL, Python), web frameworks (Django, Flask, FastAPI), or API (REST, GraphQL).
+Strong ability to convert ideas to running code.
+Familiarity with Test-Driven Development.
+Proficient with Docker.
+Familiarity with Jupyter Notebook.
+Familiar with microservice architecture design.
+Knowledge of security concerns and best practices.
+Excellent verbal and oral communication skills in both Mandarin and English.
+
+What you get working with us:
+Be a part of a world-class technical team working alongside offices in different parts of the world.
+Have the opportunity to consolidate a quickly growing startup.
+Have access to state-of-the-art infrastructure and technology.
+Have a competitive salary (1.5-2.2 million NTD/year) in a well-funded high-growth company. 
+
+Our defining values:
+We care deeply about our learners: We let our learner's needs guide our actions and decisions and put our mission ahead of ourselves.
+We are great at what we do: We strive for excellence in all dimensions, especially in the quality of the content we create and the people we hire.
+We default to action: We are comfortable acting with limited information and taking ownership of our decisions. 
+We ask why: We ask the hard questions and are open to being in the wrong. We advocate for the best ideas, not our ideas. 
+We are honest and authentic: We are transparent as an organization, over-communicate to build trust, and share our failures just as we do our successes.
+We do this together: We help each other grow and succeed and have fun at work, even in a remote environment.
+At DeepLearning.AI, we are committed to providing an environment of mutual respect where equal employment opportunities are available to all applicants without regard to race, color, religion, sex, pregnancy (including childbirth, lactation, and related medical conditions), national origin, age, physical and mental disability, marital status, sexual orientation, gender identity, gender expression, genetic information (including characteristics and testing), military and veteran status, and any other characteristic protected by applicable law. 
+DeepLearning.AI believes that diversity and inclusion among our employees are critical to our success as a company. We seek to recruit, develop, and retain the most talented people from a diverse candidate pool. Selection for employment is decided based on qualifications, merit, and business needs.
