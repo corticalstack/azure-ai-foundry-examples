@@ -10,3 +10,4 @@ build/
 # Logs
 *.log
 logs/
+.venv/
