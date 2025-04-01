@@ -31,7 +31,7 @@ Make sure these resources are properly deployed and configured before running th
 
 🧮 [08_agents](./08_agents/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry, including a personal learning coach, grounding with Bing search, code interpreter, file search, and function calling capabilities.
 
-🧮 [09_agents_with_semantic_kernel](./09_agents_with_semantic_kernel/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry and Semantic Kernel, including interactive chat, code interpreter for data visualization, and file search capabilities.
+🧮 [09_agents_with_semantic_kernel](./09_agents_with_semantic_kernel/README.md): Examples demonstrating how to create and use AI agents with Azure AI Foundry and Semantic Kernel. Includes interactive chat, code interpreter for data visualization, file search, and multi-agent collaboration.
 
 ## 🛠️ Setup Guide
 
@@ -110,6 +110,7 @@ Contributions and suggestions are welcome! Please see the [contributing guidelin
 - [Azure AI Inference API Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/reference-model-inference-api?view=azureml-api-2&tabs=python)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
 - [Semantic Kernel GitHub repo](https://github.com/microsoft/semantic-kernel)
+- [Semantic Kernel agent collaboration](https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-chat?pivots=programming-language-python)
 
 ## ❓ FAQ
 
@@ -162,4 +163,10 @@ This helps ground the model's response in real data, reducing hallucinations.
 <details>
 <summary><strong>What is Semantic Kernel?</strong></summary>
 Semantic Kernel is a lightweight, open-source development kit that lets you easily build AI agents and integrate the latest AI models into your C#, Python, or Java codebase. It serves as an efficient middleware that enables rapid delivery of enterprise-grade solutions.
+</details>
+
+
+<details>
+<summary><strong>In Semantic Kernel, what is a kernel</strong></summary>
+An SK kernel is the central orchestration component that serves as the main entry point to the framework. It manages integration with AI services like Azure OpenAI, memory sharing, and function registry and execution.
 </details>
