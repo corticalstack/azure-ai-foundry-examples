@@ -1,4 +1,4 @@
-# 🤖 Azure AI Foundry Examples
+![Semantic Kernel](assets/images/azure-ai-foundry-examples-xs.jpeg)
 
 This repository contains examples demonstrating how to work with Azure AI Foundry and it's assets. AI Foundry is accessed at [ai.azure.com](http://ai.azure.com)
 
