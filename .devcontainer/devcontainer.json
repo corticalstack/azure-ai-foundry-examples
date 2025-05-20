@@ -36,8 +36,7 @@
     // Mount the user's Azure credentials directory and .env file into the container
     // This allows the container to use the same Azure authentication and environment variables as the host
     "mounts": [
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/appuser/.azure,type=bind,consistency=cached",
-        "source=${localWorkspaceFolder}/.env,target=/workspaces/azure-ai-foundry-examples/.env,type=bind,consistency=cached"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/appuser/.azure,type=bind,consistency=cached"
     ],
     
     // Define how the local workspace is mounted into the container
